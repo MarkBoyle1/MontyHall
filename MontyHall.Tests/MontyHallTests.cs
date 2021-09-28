@@ -22,5 +22,13 @@ namespace MontyHall.Tests
             
             Assert.Equal(75, _results.CalculateWinningPercentage(results));
         }
+        
+        [Fact]
+        public void Test3()
+        {
+            Doors doors = new Doors(3);
+
+            Assert.True(doors._winningDoor > 0 && doors._winningDoor < 4);
+        }
     }
 }

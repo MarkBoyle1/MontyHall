@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MontyHall
 {
@@ -6,7 +7,8 @@ namespace MontyHall
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Results results = new Results();
+            results.CalculateWinningPercentage(new List<string>() {"won", "won", "won", "lost"});
         }
     }
 }

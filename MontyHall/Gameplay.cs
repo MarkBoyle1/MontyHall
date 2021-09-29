@@ -4,46 +4,41 @@ namespace MontyHall
 {
     public class Gameplay
     {
-        private Doors _doors;
+        private IDoors _doors;
         private IUserInput _userInput;
         private int _chosenDoor;
         private int _numberOfDoors;
         private int _revealedDoor;
-        public Gameplay(int numberOfDoors, IUserInput userInput)
+        private int _winningDoor;
+        public Gameplay(int numberOfDoors, IUserInput userInput, IDoors doors)
         {
-            _doors = SetUpDoors(numberOfDoors);
+            _doors = doors;
             _userInput = userInput;
             _numberOfDoors = numberOfDoors;
         }
 
         public string PlayOneRound()
         {
-            _doors = SetUpDoors(_numberOfDoors);
+            _winningDoor = _doors.PickDoorToPlacePrizeBehind();
             _chosenDoor = PickInitialDoor();
             _revealedDoor = RevealOneDoor();
+
             int decision = DecideToStayOrChange();
             _chosenDoor = AdjustChosenDoor(decision);
+
             return RevealResult();
         }
-        
-        //Set up doors
-        private Doors SetUpDoors(int numberOfDoors)
-        {
-            return new Doors(numberOfDoors);
-        }
-        
-        //Pick initial door
+
         private int PickInitialDoor()
         {
             return _userInput.PickInitialDoor();
         }
         
-        //Reveal one door
         private int RevealOneDoor()
         {
             for (int i = 1; i < _numberOfDoors + 1; i++)
             {
-                if (i != _chosenDoor && i != _doors.WinningDoor)
+                if (i != _chosenDoor && i != _winningDoor)
                 {
                     return i;
                 }
@@ -52,7 +47,6 @@ namespace MontyHall
             return 0;
         }
         
-        //Ask to stay or change
         private int DecideToStayOrChange()
         {
             return _userInput.DecideToChangeOrStay();
@@ -65,7 +59,7 @@ namespace MontyHall
                 return _chosenDoor;
             }
             
-            for (int i = 1; i < _numberOfDoors; i++)
+            for (int i = 1; i < _numberOfDoors + 1; i++)
             {
                 if (i != _chosenDoor && i != _revealedDoor)
                 {
@@ -76,10 +70,9 @@ namespace MontyHall
             return 1;
         }
         
-        //Reveal result
         private string RevealResult()
         {
-            return _chosenDoor == _doors.WinningDoor ? "won" : "lost";
+            return _chosenDoor == _winningDoor ? "won" : "lost";
         }
     }
 }

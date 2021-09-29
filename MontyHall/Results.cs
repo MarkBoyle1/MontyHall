@@ -12,22 +12,22 @@ namespace MontyHall
         private Gameplay _stayStrategy;
         private IOutput _output;
         
-        public Results()
+        public Results(IDoors doors)
         {
             _changeStrategyResultsList = new List<string>();
             _stayStrategyResultsList = new List<string>();
-            _changeStrategy = new Gameplay(3, new TestUserInputChangeStrategy());
-            _stayStrategy = new Gameplay(3, new TestUserInputStayStrategy());
+            _changeStrategy = new Gameplay(3, new TestUserInputChangeStrategy(), doors);
+            _stayStrategy = new Gameplay(3, new TestUserInputStayStrategy(), doors);
             _output = new ConsoleOutput();
 
         }
 
         public string RunProgram()
         {
-            _changeStrategyResultsList = PlayMultipleRounds(1000, _changeStrategy);
+            _changeStrategyResultsList = PlayMultipleRounds(5, _changeStrategy);
             double changePercentageOfWins = CalculateWinningPercentage(_changeStrategyResultsList);
             
-            _stayStrategyResultsList = PlayMultipleRounds(1000, _stayStrategy);
+            _stayStrategyResultsList = PlayMultipleRounds(5, _stayStrategy);
             double stayPercentageOfWins = CalculateWinningPercentage(_stayStrategyResultsList);
 
             string winningStrategy = DeclareStrategyWinner(changePercentageOfWins, stayPercentageOfWins);

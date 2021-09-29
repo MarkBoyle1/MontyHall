@@ -6,40 +6,34 @@ namespace MontyHall.Tests
 {
     public class MontyHallTests
     {
-        private Results _results = new Results();
-  
         [Fact]
         public void when_RunProgram_then_return_ChangeOrStay()
         {
-            string result = _results.RunProgram();
+            Results results = new Results(new DoorsFixedWinnerTo3());
 
-            List<string> possibleResults = new List<string>() {"Change", "Stay"};
+            string winningStrategy = results.RunProgram();
 
-            Assert.Contains(result, possibleResults);
+            Assert.Equal("Change", winningStrategy);
         }
         
         [Fact]
         public void when_PlayOneRound_and_inputEqualsTestUserInputStayStrategy_then_return_wonOrLost()
         {
-            Gameplay stayStrategy = new Gameplay(3, new TestUserInputStayStrategy());
+            Results results = new Results(new DoorsFixedWinnerTo1());
 
-            string result = stayStrategy.PlayOneRound();
+            string winningStrategy = results.RunProgram();
 
-            List<string> possibleResults = new List<string>() {"won", "lost"};
-
-            Assert.Contains(result, possibleResults);
+            Assert.Equal("Stay", winningStrategy);
         }
         
         [Fact]
         public void when_PlayOneRound_and_inputEqualsTestUserInputChangeStrategy_then_return_wonOrLost()
         {
-            Gameplay changeStrategy = new Gameplay(3, new TestUserInputChangeStrategy());
+            Results results = new Results(new DoorsFixedWinnerTo2());
 
-            string result = changeStrategy.PlayOneRound();
+            string winningStrategy = results.RunProgram();
 
-            List<string> possibleResults = new List<string>() {"won", "lost"};
-
-            Assert.Contains(result, possibleResults);
+            Assert.Equal("Change", winningStrategy);
         }
     }
 }

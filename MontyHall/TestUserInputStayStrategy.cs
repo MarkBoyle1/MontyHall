@@ -2,14 +2,14 @@ namespace MontyHall
 {
     public class TestUserInputStayStrategy : IUserInput
     {
-        public string PickInitialDoor()
+        public int PickInitialDoor()
         {
-            return "1";
+            return 1;
         }
 
-        public string DecideToChangeOrStay()
+        public int DecideToChangeOrStay()
         {
-            return "0";
+            return 0;
         }
     }
 }

@@ -6,17 +6,17 @@ namespace MontyHall
     {
         private Random _random = new Random();
         private int _numberOfDoors;
-        public int _winningDoor { get; }
+        public int WinningDoor { get; }
 
         public Doors(int numberOfDoors)
         {
             _numberOfDoors = numberOfDoors;
-            _winningDoor = PickDoorToPlacePrizeBehind();
+            WinningDoor = PickDoorToPlacePrizeBehind();
         }
 
         private int PickDoorToPlacePrizeBehind()
         {
-            return _random.Next(_numberOfDoors);
+            return _random.Next(1, _numberOfDoors + 1);
         }
     }
 }

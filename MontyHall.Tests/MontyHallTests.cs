@@ -7,28 +7,39 @@ namespace MontyHall.Tests
     public class MontyHallTests
     {
         private Results _results = new Results();
+  
         [Fact]
-        public void Test1()
+        public void when_RunProgram_then_return_ChangeOrStay()
         {
-            string winningStrategy = "stay";
-            
-            Assert.Equal(winningStrategy, _results.DeclareWinningStrategy());
-        }
-        
-        [Fact]
-        public void Test2()
-        {
-            List<string> results = new List<string>() {"won", "won", "won", "lost"};
-            
-            Assert.Equal(75, _results.CalculateWinningPercentage(results));
-        }
-        
-        [Fact]
-        public void Test3()
-        {
-            Doors doors = new Doors(3);
+            string result = _results.RunProgram();
 
-            Assert.True(doors._winningDoor > 0 && doors._winningDoor < 4);
+            List<string> possibleResults = new List<string>() {"Change", "Stay"};
+
+            Assert.Contains(result, possibleResults);
+        }
+        
+        [Fact]
+        public void when_PlayOneRound_and_inputEqualsTestUserInputStayStrategy_then_return_wonOrLost()
+        {
+            Gameplay stayStrategy = new Gameplay(3, new TestUserInputStayStrategy());
+
+            string result = stayStrategy.PlayOneRound();
+
+            List<string> possibleResults = new List<string>() {"won", "lost"};
+
+            Assert.Contains(result, possibleResults);
+        }
+        
+        [Fact]
+        public void when_PlayOneRound_and_inputEqualsTestUserInputChangeStrategy_then_return_wonOrLost()
+        {
+            Gameplay changeStrategy = new Gameplay(3, new TestUserInputChangeStrategy());
+
+            string result = changeStrategy.PlayOneRound();
+
+            List<string> possibleResults = new List<string>() {"won", "lost"};
+
+            Assert.Contains(result, possibleResults);
         }
     }
 }

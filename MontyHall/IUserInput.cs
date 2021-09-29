@@ -2,7 +2,7 @@ namespace MontyHall
 {
     public interface IUserInput
     {
-        public string PickInitialDoor();
-        public string DecideToChangeOrStay();
+        public int PickInitialDoor();
+        public int DecideToChangeOrStay();
     }
 }

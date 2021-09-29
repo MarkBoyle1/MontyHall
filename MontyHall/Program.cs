@@ -8,7 +8,7 @@ namespace MontyHall
         static void Main(string[] args)
         {
             Results results = new Results();
-            results.CalculateWinningPercentage(new List<string>() {"won", "won", "won", "lost"});
+            results.RunProgram();
         }
     }
 }

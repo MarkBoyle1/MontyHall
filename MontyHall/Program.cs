@@ -7,7 +7,7 @@ namespace MontyHall
     {
         static void Main(string[] args)
         {
-            Results results = new Results(new DoorsFixedWinnerTo3());
+            Results results = new Results(new DoorsFixedWinner(3));
             results.RunProgram();
         }
     }

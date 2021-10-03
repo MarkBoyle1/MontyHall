@@ -24,10 +24,10 @@ namespace MontyHall
 
         public string RunProgram()
         {
-            _changeStrategyResultsList = PlayMultipleRounds(5, _changeStrategy);
+            _changeStrategyResultsList = PlayMultipleRounds(1000, _changeStrategy);
             double changePercentageOfWins = CalculateWinningPercentage(_changeStrategyResultsList);
             
-            _stayStrategyResultsList = PlayMultipleRounds(5, _stayStrategy);
+            _stayStrategyResultsList = PlayMultipleRounds(1000, _stayStrategy);
             double stayPercentageOfWins = CalculateWinningPercentage(_stayStrategyResultsList);
 
             string winningStrategy = DeclareStrategyWinner(changePercentageOfWins, stayPercentageOfWins);
